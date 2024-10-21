@@ -35,8 +35,8 @@ function main() {
     #if  [  "$prompt_enable" == 'true' ] ; then
     #    customize_shell_prompt
     #fi
-    
-    e "Have a fun console 💪🏻✨"
+
+    echo 'Happy day!'
 
 }
 

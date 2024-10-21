@@ -58,6 +58,11 @@ PACKAGE_EXT=""
 # Enable a prompt with Powerline
 prompt_enable="true"
 
+# Prompt
+STARSHIP_INSTALLED="false"
+
+#Prompt
+POWERLINE_INSTALLED="false"
 
 EOF
 
@@ -87,7 +92,9 @@ function load_environment_variables {
 
 # Function to capture initial environment values
 function capture_environment_snapshot() {
-    check_ok "Environment Snapshot"
+    
+    # uncomment for debugging	
+    # check_ok "Environment Snapshot"
 
     # Capture initial values
     initial_install_googlechrome=$install_googlechrome
@@ -172,7 +179,6 @@ function update_environment_file {
 
 # Function to check for changes in variables and update if necessary
 function check_env_changes {
-    show_message "Checking environment for changes..."
 
     # Variable para rastrear si hay cambios
     local changes_detected=false
@@ -223,13 +229,17 @@ function check_env_changes {
         changes_detected=true
     fi
 
+    checked "Environment Checked."
+    #checkedhow_message "✔️ Environment Checked" # TOREMOVE
+    
     # Si se detectaron cambios, actualizar el archivo de entorno
     if [ "$changes_detected" = true ]; then
         update_environment_file  # Actualiza el archivo con los nuevos valores.
         capture_environment_snapshot  # Captura nuevamente los valores actuales.
         echo "✅ Environment file updated with new values."
-    else
-        echo "✔️ No changes detected in the environment."
+     
+    #else
+    #    echo "✔️ No changes detected in the environment."
     fi
 }
 

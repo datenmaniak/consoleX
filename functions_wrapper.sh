@@ -8,9 +8,11 @@
 #source $HELPERS/001-messages_helper.sh
 
 #source ./helpers.sh  # Cargar el archivo de helpers
+
 for helper in $HELPERS/*_helper.sh; do
-	source "$helper"
-	
     # uncomment to debug
-     #check_ok " $helper"
+     echo -e "file: $helper"
+   
+    source "$helper"
+	
 done

@@ -1,0 +1,155 @@
+# ~/.config/starship.toml
+
+# ~/.config/starship.toml
+
+[python]
+symbol = '🐍 '
+pyenv_version_name = true
+format = '[($virtualenv )]($style)'
+
+[package]
+format = 'via [🎁 $version](208 bold) '
+
+[memory_usage]
+disabled = true
+threshold = -1
+symbol = ''
+style = 'bold dimmed green'
+
+[localip]
+ssh_only = false
+format = '@[$localipv4](bold red) '
+disabled = true
+
+[line_break]
+disabled = false
+
+[jobs]
+symbol = '+ '
+number_threshold = 4
+symbol_threshold = 0
+
+
+[hostname]
+ssh_only = false
+format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
+#trim_at = '.devops.lan'
+disabled = true
+
+
+[[battery.display]]
+threshold = 10
+style = 'bold red'
+
+[nodejs]
+detect_files = ['package.json', '.node-version', '!bunfig.toml', '!bun.lockb']
+
+
+
+[character]
+success_symbol = '[➜](bold green) '
+error_symbol = '[✗](bold red) '
+
+
+[container]
+format = '[$symbol \[$name\]]($style) '
+
+
+[directory]
+truncation_length = 8
+truncation_symbol = '…/'
+style = 'bold green'
+home_symbol = '~'
+
+[docker_context]
+format = 'via [🐋 $context](blue bold)'
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile','compose.yaml']
+detect_folders = ['docker']
+
+
+[git_branch]
+symbol = '🌱 '
+truncation_length = 12
+truncation_symbol = ''
+#ignore_branches = ['master', 'main']
+ignore_branches = []
+
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = '🔖 '
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[🍒 PICKING](bold red)'
+
+
+[git_status]
+conflicted = '🏳'
+ahead = '🏎💨'
+behind = '😰'
+diverged = '😵'
+up_to_date = '✓'
+untracked = '🤷'
+stashed = '📦'
+modified = '📝'
+staged = '[++\($count\)](green)'
+renamed = '👅'
+deleted = '🗑'
+
+# This is the default symbols table.
+[os.symbols]
+AIX = "➿ "
+Alpaquita = "🔔 "
+AlmaLinux = "💠 "
+Alpine = "🏔️ "
+Amazon = "🙂 "
+Android = "🤖 "
+Arch = "🎗️ "
+Artix = "🎗️ "
+CentOS = "💠 "
+Debian = "🌀 "
+DragonFly = "🐉 "
+Emscripten = "🔗 "
+EndeavourOS = "🚀 "
+Fedora = "🎩 "
+FreeBSD = "😈 "
+Garuda = "🦅 "
+Gentoo = "🗜️ "
+HardenedBSD = "🛡️ "
+Illumos = "🐦 "
+Kali = "🐉 "
+Linux = "🐧 "
+Mabox = "📦 "
+Macos = "🍎 "
+Manjaro = "🥭 "
+Mariner = "🌊 "
+MidnightBSD = "🌘 "
+Mint = "🌿 "
+NetBSD = "🚩 "
+NixOS = "❄️ "
+OpenBSD = "🐡 "
+OpenCloudOS = "☁️ "
+openEuler = "🦉 "
+openSUSE = "🦎 "
+OracleLinux = "🦴 "
+Pop = "🍭 "
+Raspbian = "🍓 "
+Redhat = "🎩 "
+RedHatEnterprise = "🎩 "
+RockyLinux = "💠 "
+Redox = "🧪 "
+Solus = "⛵ "
+SUSE = "🦎 "
+Ubuntu = "🎯 "
+Ultramarine = "🔷 "
+Unknown = "❓ "
+Void = "  "
+Windows = "🪟 "
+
+[os]
+format = "on [($name )]($style)"
+style = "bold blue"
+disabled = false
+
+

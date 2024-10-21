@@ -160,5 +160,5 @@ if [ -z "$PACKAGE_EXT" ] || [ -z "$PACKAGE_MGR" ]; then
     echo "Error: PACKAGE_EXT or PACKAGE_MGR is not set. Please check your environment file."
 else 
     # Call the installation function for Powerline based on the package manager type.
-    install_powerline 
+    echo "TODO: install_powerline "
 fi 

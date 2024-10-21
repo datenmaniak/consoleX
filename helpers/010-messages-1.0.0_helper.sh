@@ -45,4 +45,8 @@ function check_ok() {
     echo -e "✅ $@"
 }
 
+function checked()  {
+    echo -e "✔️ $@ "
+}
+
 

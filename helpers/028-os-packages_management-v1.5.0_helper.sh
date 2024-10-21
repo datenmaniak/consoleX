@@ -97,4 +97,4 @@ update_environment_variable "PACKAGE_EXT" "$PACKAGE_EXT"
 
 
 # Output the identified OS and package manager information
-echo -e "✅ OS/Packages: $OS-$VER/$PACKAGE_EXT"
+checked " OS/Package manager identified: $OS-$VER/$PACKAGE_EXT"
