@@ -33,6 +33,8 @@ else
     exit 1
 fi
 
+echo $PACKAGE_MGR
+
 # Función para instalar fuentes usando el gestor de paquetes definido
 install_font() {
     case $1 in

@@ -179,11 +179,16 @@ else
     if grep -qE 'Debian|Ubuntu' /etc/os-release; then
         SYSTEM_TYPE="deb"
         PACKAGE_MGR="apt"
-    else
+    elif grep -qE 'Fedora|Rocky' /etc/os-release; then
         SYSTEM_TYPE="rpm"
         PACKAGE_MGR="yum"
+    elif grep -qE 'arch|manjaro' /etc/os-release; then
+        SYSTEM_TYPE="pkg.tar.xz"
+        PACKAGE_MGR="pamac"
+    else 
+        SYSTEM_TYPE="None"
+        PACKAGE_MGR="None"
     fi
-    
     # Create a new environment file with default values and comments (customize as needed)
     {
       echo "# Default environment variables for package management"
@@ -201,16 +206,25 @@ else
 fi
 
 # Ensure PACKAGE_EXT and PACKAGE_MGR are set from the environment file.
-if [ -z "$PACKAGE_EXT" ] || [ -z "$PACKAGE_MGR" ]; then 
-    echo "Error: PACKAGE_EXT or PACKAGE_MGR is not set. Please check your environment file."
+#if [ -z "$PACKAGE_EXT" ] || [ -z "$PACKAGE_MGR" ]; then 
+if [ -z "$PACKAGE_MGR" ]; then 
+    #warning_this "Error: PACKAGE_EXT or PACKAGE_MGR is not set.\n Please check your environment file."
+    warning_this "Error: PACKAGE_MGR was not setup.\n Please check your environment file."
 else 
     # Comprobar si ya se han instalado los prompts
     if [ "$(get_environment_variable "POWERLINE_INSTALLED")" = "true" ]; then
         checked "Powerline ya está instalado."
     elif [ "$(get_environment_variable "STARSHIP_INSTALLED")" = "true" ]; then
         checked "Starship ya está instalado."
+    elif [ "$install_any_prompt" = "false" ]; then
+        about_this "Console prompt: El usuario eligió no instalar"
     else
         echo "Ninguno de los prompts está instalado."
+
+        # Check if user chose not to install before
+        # if [ "$install_any_prompt" = false ]; then
+        #    return 1
+        # fi
 
         # Present the user with a choice between Powerline and Starship
         echo -e "\nSelect your preferred prompt theme:"
@@ -232,7 +246,10 @@ else
                         ;;                                                                            
                     3)
                         echo "Exiting installation process."
-                        exit 0                                                                       
+                        update_environment_variable "install_any_prompt" "false"
+                        
+                        #exit 0                                                                       
+                        return
                         ;;                                                                            
                     *) 
                         echo "Ooops - unknown choice $REPLY"                                          
@@ -242,6 +259,6 @@ else
         done                                                                                         
     fi
 fi
-#!/bin/bash
+
 
 

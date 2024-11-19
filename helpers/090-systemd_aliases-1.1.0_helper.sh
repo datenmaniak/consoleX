@@ -71,4 +71,6 @@ sdrlo() {
 #    helpsystemd
 #fi
 
-about_this "Shortcuts to systemctl -  run: helpsystemd"
+check_ok "Systemd aliases -  (helpsystemd)"
+
+about_this "Shortcuts to systemctl, run: helpsystemd"

@@ -2,6 +2,9 @@
 
 # Environment control
 
+# load messages dialogs
+#source $HELPERS/010-messages-1.0.0_helper.sh
+
 # get current date
 datetime=$(date +"%Y-%m-%d %H:%M:%S")
 
@@ -9,9 +12,9 @@ datetime=$(date +"%Y-%m-%d %H:%M:%S")
 # Function to verify the existence of the environment file
 function verify_environment_file {
     if [[ -f "$ENVIRONMENT" ]]; then
-        #check_ok "Environment file found."
         return 0
     else
+        warning_this "Warning: environment file not found "
         return 1  # Return 1 if the environment file is not found
     fi
 }
@@ -20,13 +23,13 @@ function verify_environment_file {
 function create_new_env_file {
     
     NEW_ENV_FILE="$APPDIR/console.env"
-
     
     if [[ ! -f "$NEW_ENV_FILE" ]]; then  # Only create if it doesn't exist
         cat <<EOF > "$NEW_ENV_FILE"
 #
 # ==================================================================
 #  $    $ENVIRONMENT        $datetime  
+#            Created by: function create_new_env_file() 
 # ==================================================================
 #
 # Default Directory 
@@ -64,9 +67,12 @@ STARSHIP_INSTALLED="false"
 #Prompt
 POWERLINE_INSTALLED="false"
 
+# Default is true, false if The user chose not to install the prompt
+install_any_prompt="true"
+
 EOF
 
-        show_message_with_prefix "New environment file created at $NEW_ENV_FILE"
+        check_ok "Environment file created: $NEW_ENV_FILE"
     else 
         show_message_with_prefix "Environment file already exists at $NEW_ENV_FILE"
     fi  
@@ -76,25 +82,28 @@ EOF
 function load_environment_variables {
     if [[ -f "$ENVIRONMENT" ]]; then
         source "$ENVIRONMENT"
-    fi
+    else 
 
-    # Set default values if variables are missing
-    APPDIR=${APPDIR:-"$HOME/consoleX"}
-    install_googlechrome=${install_googlechrome:-\"false\"}
-    allowed_packages=${allowed_packages:-\"(deb|rpm)\"}
-    helpers=${helpers:-"$APPDIR/helpers"}
-    OS=${OS:-"unknown"}
-    VER=${VER:-"unknown"}
-    PACKAGE_MGR=${PACKAGE_MGR:-"unknown"}
-    PACKAGE_EXT=${PACKAGE_EXT:-"unknown"}
-    prompt_enable=${prompt_enable:-\"false\"}
+        create_new_env_file
+        check_ok "Environment file Created."
+        # Set default values if variables are missing
+        # APPDIR=${APPDIR:-"$HOME/consoleX"}
+        # install_googlechrome=${install_googlechrome:-\"false\"}
+        # allowed_packages=${allowed_packages:-\"(deb|rpm)\"}
+        # helpers=${helpers:-"$APPDIR/helpers"}
+        # OS=${OS:-"unknown"}
+        # VER=${VER:-"unknown"}
+        # PACKAGE_MGR=${PACKAGE_MGR:-"unknown"}
+        # PACKAGE_EXT=${PACKAGE_EXT:-"unknown"}
+        # prompt_enable=${prompt_enable:-\"false\"}
+    fi
 }
 
 # Function to capture initial environment values
 function capture_environment_snapshot() {
     
     # uncomment for debugging	
-    # check_ok "Environment Snapshot"
+
 
     # Capture initial values
     initial_install_googlechrome=$install_googlechrome
@@ -229,7 +238,8 @@ function check_env_changes {
         changes_detected=true
     fi
 
-    checked "Environment Checked."
+    
+    debug_this "[check_env_changes] $PACKAGE_MGR"
     #checkedhow_message "✔️ Environment Checked" # TOREMOVE
     
     # Si se detectaron cambios, actualizar el archivo de entorno
@@ -243,14 +253,20 @@ function check_env_changes {
     fi
 }
 
+
 # Verify the existence of the environment file and create it if it does not exist.
 if ! verify_environment_file; then
+
    create_new_env_file  # Create a new environment file if it does not exist.
 fi
 
 # Load existing environment variables or set defaults.
 load_environment_variables
 
+
+
 # Initialize by capturing current environment values and checking for changes.
 capture_environment_snapshot  # Captura los valores iniciales.
-check_env_changes   # Llama a esta función para verificar cambios.
+#check_env_changes   # Llama a esta función para verificar cambios.
+
+source $HELPERS/025-os-packages_management-v1.5.0.sh

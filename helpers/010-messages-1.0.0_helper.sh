@@ -46,7 +46,20 @@ function check_ok() {
 }
 
 function checked()  {
-    echo -e "✔️ $@ "
+    echo -e "🚀 $@ "
+}
+
+function debug_this() {
+    echo -e "🚨🚧🚧🚧 $@  🚧🚧🚧 🚨"
+}
+
+function warning_this()  {
+    echo -e "❌ $@ ⚠️ "
+}
+
+
+function about_this()  {
+    echo -e "🚨 $@  "
 }
 
 

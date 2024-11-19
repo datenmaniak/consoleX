@@ -71,6 +71,10 @@ case "$OS" in
         PACKAGE_MGR="zypper"
         PACKAGE_EXT="rpm"
         ;;
+    arch|manjaro)
+        PACKAGE_MGR="pamac"
+        PACKAGE_EXT="pkg.tar.xz"
+        ;;
     *)
         PACKAGE_MGR="unknown"
         PACKAGE_EXT="unknown"
@@ -88,13 +92,13 @@ fi
 
 identify_os_and_version
 
-# Update the environment variables in the environment file
+# Output the identified OS and package manager information
+checked " System/Package format: $OS/$PACKAGE_EXT"
 
+# Update the environment variables in the environment file
 update_environment_variable "OS" "$OS"
 update_environment_variable "VER" "$VER"
 update_environment_variable "PACKAGE_MGR" "$PACKAGE_MGR"
 update_environment_variable "PACKAGE_EXT" "$PACKAGE_EXT"
+about_this "$OS, $PACKAGE_MGR, $PACKAGE_EXT " 
 
-
-# Output the identified OS and package manager information
-checked " OS/Package manager identified: $OS-$VER/$PACKAGE_EXT"
