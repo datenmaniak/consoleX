@@ -36,7 +36,7 @@ dnls() {
 }
 
 # Función de ayuda que muestra información sobre las funciones disponibles
-my-docker-help() {
+help-mydocker() {
     echo "Funciones disponibles:"
     echo ""
     echo "  dcup     Levanta los contenedores definidos en el archivo docker-compose."
@@ -56,6 +56,8 @@ my-docker-help() {
     echo ""
     echo "  my-docker-help     Muestra esta ayuda."
 }
+
+about_this "Shortcuts to Docker shortcuts, run: help-mydocker"
 
 # Fin del script
 

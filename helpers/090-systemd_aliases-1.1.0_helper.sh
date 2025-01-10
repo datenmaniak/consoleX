@@ -1,5 +1,5 @@
 # Función de ayuda
-helpsystemd() {
+help-mysystemd() {
     echo "Comandos disponibles:"
     echo "  sstart [servicio]  - Inicia el/los servicio(s) especificado(s)."
     echo "  sstop [servicio]   - Detiene el/los servicio(s) especificado(s)."
@@ -71,6 +71,6 @@ sdrlo() {
 #    helpsystemd
 #fi
 
-check_ok "Systemd aliases -  (helpsystemd)"
+#check_ok "Systemd aliases -  (helpsystemd)"
 
-about_this "Shortcuts to systemctl, run: helpsystemd"
+about_this "Shortcuts to systemctl, run: help-mysystemd"
